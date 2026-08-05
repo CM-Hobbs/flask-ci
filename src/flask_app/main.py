@@ -3,6 +3,15 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+
+@app.route("/")
+def hello_world():
+    return "Hello World!"
+
+
+
+
+'''
 # Look for a env variable BUILD_SHA, if not found set to "dev"
 BUILD_SHA = os.getenv("BUILD_SHA", "dev")
 
@@ -20,3 +29,4 @@ def healthz():
 
 @app.get("/greet/<name>")
 
+'''
