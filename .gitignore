@@ -1,0 +1,52 @@
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.coverage
+htmlcov/
+*.pytest_cache/
+
+# PyCharm / VS Code
+.idea/
+*.code-workspace
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Data (if you don’t want to commit large datasets)
+data/
+
+# Practice Python
+practice/
+
+# Security
+*.pub
+*keys
+*.pem
+*.keys
+*.p12
+*.jks
