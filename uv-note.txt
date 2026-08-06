@@ -1,0 +1,3 @@
+I used uv to create the requirements:
+
+uv pip compile pyproject.toml -o requirements.txt

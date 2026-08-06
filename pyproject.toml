@@ -1,31 +1,25 @@
-### Define build #########################################################################################
+# Define build
 [build-system]
-requires = ["setuptools>=64","wheel"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
-### Project details ##########################################################################################################
+# Project details
 [project]
-name = "flask-CICD"
+name = "flask_ci"
 version = "0.0.1"
 description = "Practice CICD using a basic flask app to docker container"
 readme = "README.md"
-requires-python = ">=3.12.3"
-license = {file = "LICENCE"}
+requires-python = ">=3.12"
 
-# runtime requirements
 dependencies = [
     "flask>=3.1.3",
+    "gunicorn>=26.0.0",
 ]
 
-# define where the source code is
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
 [tool.setuptools.packages.find]
-where = ['app']
-
-### dev tools and code testers ###############################################################################################
-# Note pip install -e . WILL NOT install these dependencies - you need to run pip install -e .[dev] manually
-[project.optional-dependencies]
-dev = ["pytest>=8"]
-
-### Define scripts to be available at CLI ####################################################################################
-[project.scripts]
-#example-cli = "example_module1.basic_tools:main" # cli-name = "location.to.script:function to fun"
+where = ['src']
