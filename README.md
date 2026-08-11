@@ -6,3 +6,9 @@
 
 # pytest unit testing
 - Very simple test against bad urls (whitespaces) in the GETS and the outputs of an internal 'normalise name' func
+
+# github workflow
+- Spins up an ubuntu VM
+- Clones my repo and installs a py interpreter
+- installs my repo using -dev requirements
+- runs pytest -v
