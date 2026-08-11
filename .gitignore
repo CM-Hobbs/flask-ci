@@ -42,6 +42,7 @@ data/
 
 # Practice Python
 practice/
+LEARNING_NOTES.txt
 
 # Security
 *.pub

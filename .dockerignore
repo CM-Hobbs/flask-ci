@@ -1,0 +1,26 @@
+# Virtual environments and caches
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+
+# Build artefacts from the editable install
+*.egg-info
+build
+dist
+
+# Git and CI — not needed inside the image
+.git
+.gitignore
+.github
+
+# Not part of the runtime app
+tests
+practice
+LEARNING_NOTES.txt
+make_reqs_uv.sh
+requirements-dev.txt
+
+# Local deploy config
+.env
+compose.yaml
