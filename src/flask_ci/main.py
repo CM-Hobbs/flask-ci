@@ -13,7 +13,8 @@ def normalise(name:str) -> str:
     '''Lower case and correct spacing'''
     if not isinstance(name, str):
         raise TypeError("name must be type str")
-    cleaned = " ".join(name.split()).lower()
+    #cleaned = " ".join(name.split()).lower()
+    cleaned = " ".join(name.split()).upper()
     if not cleaned:
         raise ValueError("name must not be empty")
     return cleaned
