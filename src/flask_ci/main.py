@@ -8,13 +8,12 @@ BUILD_SHA = os.getenv("BUILD_SHA","dev")
 
 app = Flask(__name__)
 
-
 def normalise(name:str) -> str:
     '''Lower case and correct spacing'''
     if not isinstance(name, str):
         raise TypeError("name must be type str")
-    #cleaned = " ".join(name.split()).lower()
-    cleaned = " ".join(name.split()).upper()
+    cleaned = " ".join(name.split()).lower()
+    #cleaned = " ".join(name.split()).upper() # checky error to test pytest
     if not cleaned:
         raise ValueError("name must not be empty")
     return cleaned
