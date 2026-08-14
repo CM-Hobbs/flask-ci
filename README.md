@@ -39,7 +39,7 @@ opt/
 - Then docker copose has everything it needs to setup the app on the new box
 
 ##### The full workflow to setup a new box with the flask-ci app
-'''bash
+```bash
 # 1. Docker
 curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
@@ -63,4 +63,4 @@ docker compose up -d
 
 # 6. Verify
 curl localhost:8000/healthz
-'''
+```
