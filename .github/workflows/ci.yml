@@ -1,5 +1,7 @@
 name: ci
 
+# github actions: run unit test, if passes build docker image and tag with build sha
+
 on:
   push:
   pull_request:
@@ -8,12 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v4 # publisher/repo@version in this case actions is from github: clones my repo into the VM
+      - uses: actions/setup-python@v5 # install py on the VM
         with:
           python-version: '3.12'
           cache: pip
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v6 # astra published this uv repo
       - name: Verify lock and requirements are current
         run: ./make_reqs_uv.sh --check
       - name: Install dependencies
@@ -22,3 +24,32 @@ jobs:
         run: pip install -e .
       - name: Run tests
         run: pytest -v
+  publish:
+    needs: test
+    if: github.ref == 'refs/heads/main' # my branch ids in .git/refs/.....
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # read the Github Repo, v write (write means github actions could push back down to my repo- danger will robinson)
+      packages: write # write up to the GHCR (different to the Github Repo - seperate identities!)
+
+    steps:
+      - uses: actions/checkout@v4 # clone my repo into the VM
+      - uses: docker/setup-buildx-action@v3  # creates the docker builder instance on the VM and waits
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }} # my ghcr creds
+          password: ${{ secrets.GITHUB_TOKEN }} # access token created by github for this session
+      - uses: docker/build-push-action@v6 # actually does the docker build and the push to ghcr
+        with:
+            context: . # push the whole repo except dockerignore
+            push: true # tells it to actually push after build
+            # Where the magic happens: assign the github commit sha (created on every commit by github)
+            # This BUILD_SHA arg is passed by ci.yml to docker/build-push-action which assigns that to a ENV variable on the docker image 
+            # in the image config file (or assign dev if missing)
+            # And when the image is run docker run passes that env variable to the VM as a linux system env var so python can see it
+            # We can also check the env looking at an docker image with docker inspect
+            build-args: BUILD_SHA=${{ github.sha }} 
+            tags: |
+              ghcr.io/cm-hobbs/flask-ci:${{ github.sha }}
+              ghcr.io/cm-hobbs/flask-ci:latest
