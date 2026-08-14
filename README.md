@@ -13,3 +13,14 @@
 - installs my repo using -dev requirements
 - runs pytest -v
 - If passes builds a docker image and tags it with the github session sha
+
+# Running the docker image
+- The socket/port is listed in the dockerfile so run docker inspect to find (8000)
+
+## From GHCR:
+````bash
+# get the SHA from an existing container if running on /healthz or off the packages tab on github
+docker pull ghcr.io/cm-hobbs/flask-ci:$SHA
+
+docker run -rm -p 8000:8000
+````

@@ -23,6 +23,7 @@ ENV BUILD_SHA=$BUILD_SHA
 RUN useradd -m -u 10001 -s /usr/sbin/nologin appuser
 USER appuser
 
+# Add a field to the docker config so can tell from docker inspect what port it uses
 EXPOSE 8000
 
 # Docker Run time - creates json array to pass as shell command to give the WSGI
