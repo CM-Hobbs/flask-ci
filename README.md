@@ -10,7 +10,7 @@
 # github actions workflow
 - Spins up an ubuntu VM
 - Clones my repo and installs a py interpreter
-- installs my repo using -dev requirements
+- installs my repo using -dev requirements again using uv
 - runs pytest -v
 - If passes builds a docker image and tags it with the github session sha
 
